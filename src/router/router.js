@@ -11,6 +11,8 @@ const routes = [
     },
     { path: '/listado', component: ()=> import('@/pages/Listado.vue'),
     },
+    { path: '/carrito', component: ()=> import("@/pages/Carrito.vue"),
+    },
 ]
 
 const router = createRouter({

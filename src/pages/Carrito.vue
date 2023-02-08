@@ -1,0 +1,30 @@
+<template>
+  <main>
+
+    <h1>Cesta de la compra</h1>
+    <div>listado de la compra</div>
+
+  </main>
+
+</template>
+
+<script>
+
+export default {
+
+}
+</script>
+
+
+
+<style scoped>
+main{
+  min-height: 700px;
+  background-color: rgba(0, 0, 0, 0.61);
+}
+main>h1{
+  font-size: 60px;
+  text-align: center;
+  padding: 20px;
+}
+</style>
