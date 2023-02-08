@@ -1,0 +1,63 @@
+<template>
+  <header>
+    <section>
+      <nav>
+        <img src="src/images/img.png">
+        <ul>
+          <li><router-link to="/login">MAQUINAS</router-link></li>
+          <li><router-link to="/login">CARRITO</router-link></li>
+          <li><router-link to="/login">INICIAR SESION</router-link></li>
+          <li><router-link to="/register">REGISTRARME</router-link></li>
+        </ul>
+      </nav>
+    </section>
+  </header>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+
+
+<style scoped>
+  header>section>nav>ul>li>a{
+    color: white;
+  }
+
+  header img {
+    margin: 7px;
+    max-height: 54px;
+  }
+
+  nav {
+    width: 100%;
+    height: 100%;
+  }
+
+  section{
+    height: 63px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+  }
+
+  header>section>nav{
+    display: flex;
+  }
+
+  header>section>nav>ul{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+  }
+
+  header>section>nav>ul>li{
+    margin: 27px;
+  }
+
+
+</style>
