@@ -1,6 +1,7 @@
 <template>
   <main>
 
+
     <div v-for="producto in productos">
       <img :src=producto.image>
       <h1>{{producto.name}}</h1>
@@ -12,17 +13,24 @@
 
 <script>
 import productos from '/src/productos.json'
+import gymApi from "@/api/gymApi";
+import axios from "axios"
 
 export default {
+
   components: {},
 
   data() {
     return {
-      productos: [],
+      productos: null,
     }
   },
-  created() {
-    productos.map((producto)=>{this.productos.push(producto)})
+  mounted() {
+        gymApi.get(`/productos/`)
+        .then(res => {this.productos = res.data})
+        .catch((e)=>{
+          console.log(e)
+        })
   }
 
 }
