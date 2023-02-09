@@ -82,6 +82,7 @@ export default {
     color: red;
     font-weight: bolder;
   }
+
   input{
     width: 300px;
     text-align: center;
