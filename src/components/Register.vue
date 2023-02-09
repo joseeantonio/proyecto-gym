@@ -19,7 +19,7 @@
             <div><input class="ckeckbox" type="checkbox" v-model="terminos">Acepto el acuerdo de terminos</div>
             <input class="btn btn-dark" type="submit" value="REGISTRARME">
             <div>
-              <h1 v-for="error in errores">{{error}}</h1>
+              <h1 class="error" v-for="error in errores">{{error}}</h1>
             </div>
           </form>
         </div>
@@ -78,6 +78,10 @@ export default {
 
 
 <style scoped>
+  .error{
+    color: red;
+    font-weight: bolder;
+  }
   input{
     width: 300px;
     text-align: center;

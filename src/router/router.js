@@ -13,6 +13,8 @@ const routes = [
     },
     { path: '/carrito', component: ()=> import("@/pages/Carrito.vue"),
     },
+    { path: '/producto/:id', component: ()=> import("@/components/detallesProducto.vue"),
+    },
 ]
 
 const router = createRouter({

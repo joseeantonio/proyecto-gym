@@ -1,23 +1,18 @@
 <template>
-  <img :src=producto.image>
-  <h1>{{producto.name}}</h1>
+
+  <h1>{{id}}</h1>
+
 </template>
 
 <script>
 
 export default {
 
-  props:{
-    producto: {
-      type:Object,
-      required:true,
-    }
-  },
-
   components: {},
 
   data() {
     return {
+      id : this.$route.params.id
     }
   },
 }

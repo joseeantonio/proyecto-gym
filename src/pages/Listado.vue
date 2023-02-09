@@ -3,8 +3,9 @@
 
 
     <div v-for="producto in productos">
-      <img :src=producto.image>
-      <h1>{{producto.name}}</h1>
+      <router-link :to="`/producto/`+producto.id">
+        <Producto :producto="producto"/>
+      </router-link>
     </div>
 
   </main>
@@ -12,13 +13,12 @@
 </template>
 
 <script>
-import productos from '/src/productos.json'
 import gymApi from "@/api/gymApi";
-import axios from "axios"
+import Producto from "@/components/Producto.vue";
 
 export default {
 
-  components: {},
+  components: {Producto},
 
   data() {
     return {
