@@ -1,7 +1,5 @@
 <template>
   <main>
-
-
     <div v-for="producto in productos">
       <router-link :to="`/producto/`+producto.id">
         <Producto :producto="producto"/>
@@ -22,11 +20,15 @@ export default {
 
   data() {
     return {
-      productos: null,
+      productos:null,
+      limite:20,
     }
   },
+  methods:{
+  }
+  ,
   mounted() {
-        gymApi.get(`/productos/`)
+        gymApi.get(`/productos/paginacion/${this.limite}`)
         .then(res => {this.productos = res.data})
         .catch((e)=>{
           console.log(e)

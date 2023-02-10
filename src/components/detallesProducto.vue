@@ -3,13 +3,13 @@
   <main>
     <section v-if="producto">
       <img :src="producto.image" alt="">
-
       <div>
         <h1>{{producto.name}}</h1>
-        <p>{{producto.description}}</p>
+        <p>descripcion: {{producto.description}}</p>
+        <h3>Precio : {{producto.size}}€</h3>
       </div>
-
     </section>
+    <button>+ Añadir a carrito</button>
   </main>
 </template>
 
@@ -61,6 +61,9 @@ h1{
 }
 p{
   margin: 50px;
+}
+button{
+  margin-left: 45%;
 }
 
 </style>
