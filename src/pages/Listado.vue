@@ -1,13 +1,15 @@
 <template>
   <main>
-    <div>
-      <div v-for="producto in productos">
+    <div class="productos">
+      <div class="producto" v-for="producto in productos">
         <router-link :to="`/producto/`+producto.id">
           <Producto :producto="producto"/>
         </router-link>
       </div>
     </div>
-    <button @click="cargarMas">Cargar mas</button>
+    <div class="div-boton">
+      <button @click="cargarMas">Cargar mas</button>
+    </div>
   </main>
 
 </template>
@@ -65,12 +67,20 @@ main{
 button{
   width: 120px;
   height: 20px;
-  margin: 20px;
+  display: flex;
+  margin: 20px auto;
 }
 
-div{
+.productos{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+}
+.producto{
+  text-align: center;
+  margin: 10px;
+}
+.div-boton{
+  padding: 10px;
 }
 
 </style>
