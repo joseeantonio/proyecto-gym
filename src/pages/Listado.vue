@@ -18,7 +18,7 @@
         </router-link>
       </div>
     </div>
-    <div class="div-boton">
+    <div v-if="limite<39" class="div-boton">
       <button @click="cargarMas">Cargar mas</button>
     </div>
   </main>
