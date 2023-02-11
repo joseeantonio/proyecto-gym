@@ -1,7 +1,18 @@
 <template>
   <main>
+    <p>Marca: Hammer <input type="checkbox" v-model="hammer"  name="marca" value="hammer">  Matrix <input type="checkbox" v-model="matrix" name="marca" value="matrix"></p>
     <div class="productos">
-      <div class="producto" v-for="producto in productos">
+      <div v-if="matrix && !hammer" class="producto" v-for="producto in productosMatrix">
+        <router-link :to="`/producto/`+producto.id">
+          <Producto :producto="producto"/>
+        </router-link>
+      </div>
+      <div v-if="!matrix && hammer" class="producto" v-for="producto in productosHammer">
+        <router-link :to="`/producto/`+producto.id">
+          <Producto :producto="producto"/>
+        </router-link>
+      </div>
+      <div v-else class="producto" v-for="producto in productos">
         <router-link :to="`/producto/`+producto.id">
           <Producto :producto="producto"/>
         </router-link>
@@ -27,6 +38,10 @@ export default {
       todosLosProductos:null,
       productos:null,
       limite:12,
+      productosHammer:null,
+      hammer:null,
+      productosMatrix:null,
+      matrix:null,
     }
   },
   methods:{
@@ -39,8 +54,13 @@ export default {
           .catch((e)=>{
             console.log(e)
           })
-      gymApi.get(`/productos/`)
-          .then(res => {this.todosLosProductos = res.data})
+      gymApi.get(`/productos/marca/Hammer`)
+          .then(res => {this.productosHammer = res.data})
+          .catch((e)=>{
+            console.log(e)
+          })
+      gymApi.get(`/productos/marca/Matrix`)
+          .then(res => {this.productosMatrix = res.data})
           .catch((e)=>{
             console.log(e)
           })
