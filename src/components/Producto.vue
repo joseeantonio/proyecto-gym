@@ -29,5 +29,9 @@ export default {
 img{
   max-height: 218px;
 }
+h1{
+  color: white;
+  margin: 10px;
+}
 
 </style>

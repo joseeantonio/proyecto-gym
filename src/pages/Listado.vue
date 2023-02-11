@@ -24,18 +24,23 @@ export default {
 
   data() {
     return {
+      todosLosProductos:null,
       productos:null,
-      limite:4,
+      limite:12,
     }
   },
   methods:{
     cargarMas(){
-      this.limite += 4
-
+      this.limite += 12
     },
     async getApi(){
       gymApi.get(`/productos/paginacion/${this.limite}`)
           .then(res => {this.productos = res.data})
+          .catch((e)=>{
+            console.log(e)
+          })
+      gymApi.get(`/productos/`)
+          .then(res => {this.todosLosProductos = res.data})
           .catch((e)=>{
             console.log(e)
           })
@@ -78,7 +83,7 @@ button{
 }
 .producto{
   text-align: center;
-  margin: 10px;
+  margin: 20px 10px 40px;
 }
 .div-boton{
   padding: 10px;
