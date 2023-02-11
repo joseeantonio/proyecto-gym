@@ -15,6 +15,8 @@ const routes = [
     },
     { path: '/producto/:id', component: ()=> import("@/components/detallesProducto.vue"),
     },
+    { path: '/productos/:marca', component: ()=> import("@/pages/productosHammer.vue"),
+    },
 ]
 
 const router = createRouter({

@@ -1,6 +1,8 @@
 <template>
-  <img :src=producto.image>
-  <h1>{{producto.name}}</h1>
+    <router-link :to="`/producto/`+producto.id">
+      <img :src=producto.image>
+      <h1>{{producto.name}}</h1>
+    </router-link>
 </template>
 
 <script>
