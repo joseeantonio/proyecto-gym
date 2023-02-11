@@ -26,5 +26,8 @@ export default {
 
 
 <style scoped>
+img{
+  max-height: 218px;
+}
 
 </style>

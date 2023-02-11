@@ -44,6 +44,7 @@ export default {
   ,
   watch:{
     limite(){
+      debugger
       this.getApi()
     }
   }
