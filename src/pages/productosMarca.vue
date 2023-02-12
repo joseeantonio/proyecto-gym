@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="marca"><h1>HAMMER</h1></div>
+    <div class="marca"><h1>{{this.$route.params.marca}}</h1></div>
     <div>
       <input v-model="peso" type="radio" value="pesoLibre" name="peso">
       <label >Peso Libre</label>
@@ -9,7 +9,6 @@
       <input v-model="peso" type="radio" value="pesoGuiado" name="peso">
       <label >Peso Guiado</label>
     </div>
-
     <div class="productos">
       <div v-if="this.peso==='pesoLibre'" class="producto" v-for="producto in productosPesoLibre">
         <Producto :producto="producto"/>
