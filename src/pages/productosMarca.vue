@@ -3,7 +3,7 @@
     <div class="marca"><h1>{{this.$route.params.marca}}</h1></div>
     <section class="filtros">
       <div class="busqueda">
-          <input v-model="busqueda" type="search" placeholder="Buscar" />
+          <input class="input-busqueda" v-model="busqueda" type="search" placeholder="Buscar" />
         <button @click="buscando" class="btn btn-primary">
           <i class="fas fa-search"></i>
         </button>
@@ -30,7 +30,7 @@
           <label >Peso Guiado</label>
         </div>
       </div>
-      <button @click="reset">Restablecer Filtros</button>
+      <button class="reset" @click="reset">Restablecer Filtros</button>
     </section>
     <div class="productos">
       <div v-if="estadoBusqueda" class="producto" v-for="producto in productosBusqueda">
@@ -92,6 +92,7 @@ export default {
       this.peso = null
       this.estadoBusqueda=false
       this.productosBusqueda=null
+      this.busqueda = null
     },
     resetPrecio(){
       this.precio = null
@@ -164,8 +165,23 @@ button{
   text-align: center;
   margin: 20px 10px 40px;
 }
-.div-boton{
-  padding: 10px;
+.btn{
+  width: 40px;
+  height: 40px;
+  margin: 0px;
+}
+.fas{
+  margin-top: 5px;
+}
+.busqueda{
+  display: flex;
+  justify-content: center;
+}
+.reset{
+  width: 150px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 </style>
