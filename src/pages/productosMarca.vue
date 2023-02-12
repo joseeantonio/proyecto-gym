@@ -1,8 +1,14 @@
 <template>
   <main>
     <div class="marca"><h1>{{this.$route.params.marca}}</h1></div>
-    <section>
-      <div v-if="peso===null" class="precio">
+    <section class="filtros">
+      <div class="busqueda">
+          <input v-model="busqueda" type="search" placeholder="Buscar" />
+        <button @click="buscando" class="btn btn-primary">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <div v-if="peso===null && estadoBusqueda!==true" class="precio">
         <h4>Precio:</h4>
         <div>
           <input v-model="precio" type="radio" value="alto-bajo" name="precio">
@@ -13,7 +19,7 @@
           <label >De Menor a Mayor</label>
         </div>
       </div>
-      <div class="categoria">
+      <div v-if="estadoBusqueda!==true" class="categoria" >
         <h4>Categoria:</h4>
         <div>
           <input @click="resetPrecio" v-model="peso" type="radio" value="peso-libre" name="peso">
@@ -27,7 +33,10 @@
       <button @click="reset">Restablecer Filtros</button>
     </section>
     <div class="productos">
-      <div v-if="this.peso===null && this.precio===null " class="producto" v-for="producto in productos">
+      <div v-if="estadoBusqueda" class="producto" v-for="producto in productosBusqueda">
+        <Producto :producto="producto"/>
+      </div>
+      <div v-else-if="this.peso===null && this.precio===null" class="producto" v-for="producto in productos">
         <Producto :producto="producto"/>
       </div>
       <div v-else-if="this.precio!==null" class="producto" v-for="producto in productosPrecio">
@@ -56,11 +65,13 @@ export default {
       peso:null,
       productosPrecio:null,
       precio:null,
+      busqueda:null,
+      estadoBusqueda:false,
+      productosBusqueda:null,
     }
   },
   methods: {
     async getApi() {
-      debugger
       gymApi.get(`productos/marca/${this.$route.params.marca}/category/${this.peso}`)
           .then(res => {
             this.productosCategory = res.data
@@ -68,7 +79,6 @@ export default {
           .catch((e) => {
             console.log(e)
           })
-      debugger
       gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
           .then(res => {
             this.productosPrecio = res.data
@@ -80,10 +90,23 @@ export default {
     reset(){
       this.precio = null
       this.peso = null
+      this.estadoBusqueda=false
+      this.productosBusqueda=null
     },
     resetPrecio(){
       this.precio = null
-    }
+    },
+    buscando(){
+      this.estadoBusqueda=true
+      debugger
+      gymApi.get(`productos/marca/${this.$route.params.marca}/busqueda/${this.busqueda}`)
+          .then(res => {
+            this.productosBusqueda = res.data
+          })
+          .catch((e) => {
+            console.log(e)
+          })
+    },
   },
   watch:{
     peso(){
