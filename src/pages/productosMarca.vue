@@ -35,6 +35,7 @@
     <div class="productos">
       <div v-if="estadoBusqueda" class="producto" v-for="producto in productosBusqueda">
         <Producto :producto="producto"/>
+<!--        Controlar si la busqueda no devuelve ningun objeto-->
       </div>
       <div v-else-if="this.peso===null && this.precio===null" class="producto" v-for="producto in productos">
         <Producto :producto="producto"/>
