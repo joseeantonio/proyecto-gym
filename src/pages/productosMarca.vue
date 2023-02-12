@@ -1,23 +1,42 @@
 <template>
   <main>
     <div class="marca"><h1>{{this.$route.params.marca}}</h1></div>
-    <div>
-      <input v-model="peso" type="radio" value="peso-libre" name="peso">
-      <label >Peso Libre</label>
-    </div>
-    <div>
-      <input v-model="peso" type="radio" value="peso-guiado" name="peso">
-      <label >Peso Guiado</label>
-    </div>
+    <section>
+      <div v-if="peso===null" class="precio">
+        <h4>Precio:</h4>
+        <div>
+          <input v-model="precio" type="radio" value="alto-bajo" name="precio">
+          <label >De Mayor a Menor</label>
+        </div>
+        <div>
+          <input v-model="precio" type="radio" value="bajo-alto" name="precio">
+          <label >De Menor a Mayor</label>
+        </div>
+      </div>
+      <div class="categoria">
+        <h4>Categoria:</h4>
+        <div>
+          <input @click="resetPrecio" v-model="peso" type="radio" value="peso-libre" name="peso">
+          <label >Peso Libre</label>
+        </div>
+        <div>
+          <input @click="resetPrecio" v-model="peso" type="radio" value="peso-guiado" name="peso">
+          <label >Peso Guiado</label>
+        </div>
+      </div>
+      <button @click="reset">Restablecer Filtros</button>
+    </section>
     <div class="productos">
-      <div v-if="this.peso!=='peso-libre' && this.peso!=='pesolguiado'" class="producto" v-for="producto in productos">
+      <div v-if="this.peso===null && this.precio===null " class="producto" v-for="producto in productos">
+        <Producto :producto="producto"/>
+      </div>
+      <div v-else-if="this.precio!==null" class="producto" v-for="producto in productosPrecio">
         <Producto :producto="producto"/>
       </div>
       <div v-else class="producto" v-for="producto in productosCategory">
         <Producto :producto="producto"/>
       </div>
     </div>
-
   </main>
 </template>
 
@@ -35,8 +54,8 @@ export default {
       productos:null,
       productosCategory:null,
       peso:null,
-      productosPrecioMayorAMenor:null,
-      productosPrecioMenorAMayor:null,
+      productosPrecio:null,
+      precio:null,
     }
   },
   methods: {
@@ -49,24 +68,29 @@ export default {
           .catch((e) => {
             console.log(e)
           })
-      gymApi.get(`productos/marca/${this.$route.params.marca}/alto-bajo`)
+      debugger
+      gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
           .then(res => {
-            this.productosPrecioMayorAMenor = res.data
+            this.productosPrecio = res.data
           })
           .catch((e) => {
             console.log(e)
           })
-      gymApi.get(`productos/marca/${this.$route.params.marca}/bajo-alto`)
-          .then(res => {
-            this.productosPrecioMenorAMayor = res.data
-          })
-          .catch((e) => {
-            console.log(e)
-          })
+    },
+    reset(){
+      this.precio = null
+      this.peso = null
+    },
+    resetPrecio(){
+      this.precio = null
     }
   },
   watch:{
     peso(){
+      debugger
+      this.getApi()
+    },
+    precio(){
       debugger
       this.getApi()
     }
