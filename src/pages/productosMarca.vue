@@ -2,21 +2,18 @@
   <main>
     <div class="marca"><h1>{{this.$route.params.marca}}</h1></div>
     <div>
-      <input v-model="peso" type="radio" value="pesoLibre" name="peso">
+      <input v-model="peso" type="radio" value="peso-libre" name="peso">
       <label >Peso Libre</label>
     </div>
     <div>
-      <input v-model="peso" type="radio" value="pesoGuiado" name="peso">
+      <input v-model="peso" type="radio" value="peso-guiado" name="peso">
       <label >Peso Guiado</label>
     </div>
     <div class="productos">
-      <div v-if="this.peso==='pesoLibre'" class="producto" v-for="producto in productosPesoLibre">
+      <div v-if="this.peso!=='peso-libre' && this.peso!=='pesolguiado'" class="producto" v-for="producto in productos">
         <Producto :producto="producto"/>
       </div>
-      <div v-else-if="this.peso==='pesoGuiado'" class="producto" v-for="producto in productosPesoGuiado">
-        <Producto :producto="producto"/>
-      </div>
-      <div v-else class="producto" v-for="producto in productos">
+      <div v-else class="producto" v-for="producto in productosCategory">
         <Producto :producto="producto"/>
       </div>
     </div>
@@ -36,39 +33,54 @@ export default {
   data() {
     return {
       productos:null,
-      productosPesoLibre:null,
-      productosPesoGuiado:null,
+      productosCategory:null,
       peso:null,
+      productosPrecioMayorAMenor:null,
+      productosPrecioMenorAMayor:null,
     }
   },
   methods: {
     async getApi() {
-      gymApi.get(`productos/marca/${this.$route.params.marca}`)
+      debugger
+      gymApi.get(`productos/marca/${this.$route.params.marca}/category/${this.peso}`)
           .then(res => {
-            this.productos = res.data
+            this.productosCategory = res.data
           })
           .catch((e) => {
             console.log(e)
           })
-      gymApi.get(`productos/marca/${this.$route.params.marca}/peso-guiado`)
+      gymApi.get(`productos/marca/${this.$route.params.marca}/alto-bajo`)
           .then(res => {
-            this.productosPesoGuiado = res.data
+            this.productosPrecioMayorAMenor = res.data
           })
           .catch((e) => {
             console.log(e)
           })
-      gymApi.get(`productos/marca/${this.$route.params.marca}/peso-libre`)
+      gymApi.get(`productos/marca/${this.$route.params.marca}/bajo-alto`)
           .then(res => {
-            this.productosPesoLibre = res.data
+            this.productosPrecioMenorAMayor = res.data
           })
           .catch((e) => {
             console.log(e)
           })
+    }
+  },
+  watch:{
+    peso(){
+      debugger
+      this.getApi()
     }
   }
   ,
   mounted() {
     this.getApi()
+    gymApi.get(`productos/marca/${this.$route.params.marca}`)
+        .then(res => {
+          this.productos = res.data
+        })
+        .catch((e) => {
+          console.log(e)
+        })
   }
 }
 </script>

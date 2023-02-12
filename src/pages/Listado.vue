@@ -57,17 +57,6 @@ export default {
           .catch((e)=>{
             console.log(e)
           })
-
-      gymApi.get(`/productos/marca/Hammer`)
-          .then(res => {this.productosHammer = res.data})
-          .catch((e)=>{
-            console.log(e)
-          })
-      gymApi.get(`/productos/marca/Matrix`)
-          .then(res => {this.productosMatrix = res.data})
-          .catch((e)=>{
-            console.log(e)
-          })
     }
   }
   ,
@@ -79,6 +68,16 @@ export default {
   }
   ,
   mounted() {
+    gymApi.get(`/productos/marca/Hammer`)
+        .then(res => {this.productosHammer = res.data})
+        .catch((e)=>{
+          console.log(e)
+        })
+    gymApi.get(`/productos/marca/Matrix`)
+        .then(res => {this.productosMatrix = res.data})
+        .catch((e)=>{
+          console.log(e)
+        })
     this.getApi()
   },
 
