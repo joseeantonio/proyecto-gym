@@ -2,7 +2,7 @@
   <main>
     <div class="marcas">
       <div class="marca"> <router-link to="/productos/Hammer"><h1>HAMMER</h1></router-link></div>
-      <div class="marca"><h1>MATRIX</h1></div>
+      <div class="marca"> <router-link to="/productos/Matrix"><h1>MATRIX</h1></router-link></div>
     </div>
     <div class="productos">
       <div v-if="matrix && !hammer" class="producto" v-for="producto in productosMatrix">
