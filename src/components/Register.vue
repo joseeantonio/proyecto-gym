@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import gymApi from "@/api/gymApi";
+
 export default {
 
   data(){
@@ -66,7 +68,16 @@ export default {
         if (!this.terminos){
           this.errores.push('Acepta los terminos.')
         }else {
-          window.alert('Registrado usuario: '+this.name+'  ,con email: '+this.email)
+          const datos = {
+            email:this.email,
+            password:this.password,
+            username:this.name
+          }
+          gymApi.post(`/users/`,datos)
+              .then(res => {this.productosHammer = res.data})
+              .catch((e)=>{
+                console.log(e)
+              })
         }
       }
     },
