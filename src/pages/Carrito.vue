@@ -2,7 +2,9 @@
   <main>
 
     <h1>Cesta de la compra de {{this.$store.state.username}}</h1>
-    <div>listado de la compra</div>
+    <div>
+      <h3>listado de la compra</h3>
+    </div>
 
   </main>
 
