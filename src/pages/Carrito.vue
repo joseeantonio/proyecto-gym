@@ -1,7 +1,7 @@
 <template>
   <main>
 
-    <h1>Cesta de la compra</h1>
+    <h1>Cesta de la compra de {{this.$store.state.username}}</h1>
     <div>listado de la compra</div>
 
   </main>
