@@ -53,12 +53,19 @@ export default {
             .then(res => {
               if (res.data.msg ==='registrado'){
                 this.$router.push('/listado')
+                debugger
+                this.setUsername()
+                console.log(this.$store.state.username)
+              }else {
+                this.errores.push('Debes de registrarte')
               }
             })
-        this.errores.push('Debes de registrarte')
       }
 
-    }
+    },
+    setUsername(){
+      this.$store.commit('setUsername',this.username)
+    },
   },
 
 }
