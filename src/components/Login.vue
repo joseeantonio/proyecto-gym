@@ -3,14 +3,19 @@
     <div class="caja-de-fuera">
       <div class="caja">
         <h1>INICIO DE SESION</h1>
-        <form class="formulario">
+        <form class="formulario" @submit="iniciarSesion">
           <label type="name">Nombre de usuario</label>
-          <input type="txt">
+          <input type="txt" v-model="username">
 
           <label type="password">Contraseña</label>
-          <input type="password">
+          <input type="password" v-model="password">
 
-          <button class="btn btn-dark" type="submit">Iniciar Sesion</button>
+          <input class="btn btn-dark" type="submit" value="INICIAR SESION">
+
+          <div>
+            <h1 class="error" v-for="error in errores">{{error}}</h1>
+          </div>
+
         </form>
       </div>
     </div>
@@ -19,7 +24,37 @@
 </template>
 
 <script>
+import gymApi from "@/api/gymApi";
+import router from "@/router/router";
+
 export default {
+
+  data(){
+    return{
+      usuarios: null,
+      errores:[],
+      username:null,
+      password:null,
+    }
+  },
+
+  methods: {
+    iniciarSesion(){
+      for (let i=0;i<this.usuarios.length;i++){
+        debugger
+        if (this.usuarios[i].username===this.username && this.usuarios[i].password===this.password){
+          this.$router.push('/listado')
+        }
+      }
+    }
+  },
+  mounted() {
+      gymApi.get(`/users/`,)
+          .then(res => {this.usuarios = res.data})
+          .catch((e)=>{
+            console.log(e)
+          })
+  }
 
 }
 </script>
