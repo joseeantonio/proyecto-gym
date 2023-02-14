@@ -1,7 +1,8 @@
 <template>
   <main>
 
-    <h1>Cesta de la compra de {{this.$store.state.username}}</h1>
+    <h1 v-if="this.$store.state.username" >Cesta de la compra de {{this.$store.state.username}}</h1>
+    <h1 v-else >Cesta de la compra</h1>
     <div>
       <h3>listado de la compra</h3>
     </div>

@@ -17,6 +17,8 @@ const routes = [
     },
     { path: '/productos/:marca', component: ()=> import("@/pages/productosMarca.vue"),
     },
+    { path: '/updatePerfil', component: ()=> import("@/pages/updateUser.vue"),
+    },
 ]
 
 const router = createRouter({

@@ -4,6 +4,7 @@
       <nav>
         <img src="src/images/img.png">
         <ul>
+          <li><router-link to="/updatePerfil">PERFIL</router-link></li>
           <li><router-link to="/listado">MAQUINAS</router-link></li>
           <li><router-link to="/carrito">CARRITO</router-link></li>
           <li><router-link to="/login">INICIAR SESION</router-link></li>
