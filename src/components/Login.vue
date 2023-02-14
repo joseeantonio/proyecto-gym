@@ -31,30 +31,28 @@ export default {
 
   data(){
     return{
-      usuarios: null,
       errores:[],
       username:null,
       password:null,
+      mensaje:null,
     }
   },
 
   methods: {
     iniciarSesion(){
-      for (let i=0;i<this.usuarios.length;i++){
-        debugger
-        if (this.usuarios[i].username===this.username && this.usuarios[i].password===this.password){
-          this.$router.push('/listado')
-        }
+      const datos = {
+        password:this.password,
+        username:this.username
       }
+      debugger
+      gymApi.post(`users/autentificacion/`,datos)
+          .then(res => {
+            if (res.data.msg ==='registrado'){
+              this.$router.push('/listado')
+            }
+          })
     }
   },
-  mounted() {
-      gymApi.get(`/users/`,)
-          .then(res => {this.usuarios = res.data})
-          .catch((e)=>{
-            console.log(e)
-          })
-  }
 
 }
 </script>
