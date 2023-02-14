@@ -40,17 +40,24 @@ export default {
 
   methods: {
     iniciarSesion(){
-      const datos = {
-        password:this.password,
-        username:this.username
+      this.errores=[]
+      if (!this.password || !this.username){
+        this.errores.push('Rellene todos los campos por favor')
+      }else{
+        const datos = {
+          password:this.password,
+          username:this.username
+        }
+        debugger
+        gymApi.post(`users/autentificacion/`,datos)
+            .then(res => {
+              if (res.data.msg ==='registrado'){
+                this.$router.push('/listado')
+              }
+            })
+        this.errores.push('Debes de registrarte')
       }
-      debugger
-      gymApi.post(`users/autentificacion/`,datos)
-          .then(res => {
-            if (res.data.msg ==='registrado'){
-              this.$router.push('/listado')
-            }
-          })
+
     }
   },
 
@@ -78,6 +85,9 @@ main>div>div>h1{
   padding-top: 150px;
 }
 
+.error{
+  color: red;
+}
 
 .caja{
   display: flex;
