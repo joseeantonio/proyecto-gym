@@ -9,7 +9,7 @@
         <h3>Precio : {{producto.size}}€</h3>
       </div>
     </section>
-    <button>+ Añadir a carrito</button>
+    <button v-if="this.$store.state.username!==null" >+ Añadir a carrito</button>
   </main>
 </template>
 
