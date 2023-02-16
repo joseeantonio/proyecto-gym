@@ -2,10 +2,12 @@
   <main>
 
     <h1 v-if="this.$store.state.username" >Cesta de la compra de {{this.$store.state.username}}</h1>
-    <div class="producto" v-for="producto in productos">
-      <router-link :to="`/producto/`+producto.id">
-        <Producto :producto="producto"/>
-      </router-link>
+    <div class="productos">
+      <div class="producto" v-for="producto in productos">
+        <router-link :to="`/producto/`+producto.id">
+          <Producto :producto="producto"/>
+        </router-link>
+      </div>
     </div>
 
   </main>
@@ -55,5 +57,13 @@ main>h1{
   font-size: 60px;
   text-align: center;
   padding: 20px;
+}
+.productos{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.producto{
+  text-align: center;
+  margin: 20px 10px 40px;
 }
 </style>
