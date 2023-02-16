@@ -64,7 +64,7 @@ export default {
 
     },
     setUsername(){
-      this.$store.commit('setUsername',this.username)
+      this.$store.commit('loginUsername',this.username)
     },
   },
 

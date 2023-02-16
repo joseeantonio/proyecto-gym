@@ -4,14 +4,21 @@ export default createStore({
 
     state:{
         username:null,
+        auth:null,
     },
 
     //MUTATIONS
     mutations:{
-        setUsername(state,username){
+        loginUsername(state,username){
             debugger
             state.username = username
+            state.auth = true
+        },
+        logoutUsername(state,username){
+            state.username = null
+            state.auth = false
         }
+
     },
 
     //ACTIONS
