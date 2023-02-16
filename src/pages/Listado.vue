@@ -67,7 +67,7 @@ export default {
     }
   }
   ,
-  mounted() {
+  created() {
     gymApi.get(`/productos/marca/Hammer`)
         .then(res => {this.productosHammer = res.data})
         .catch((e)=>{

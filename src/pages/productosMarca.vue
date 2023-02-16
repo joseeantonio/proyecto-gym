@@ -121,7 +121,7 @@ export default {
     }
   }
   ,
-  mounted() {
+  created() {
     this.getApi()
     gymApi.get(`productos/marca/${this.$route.params.marca}`)
         .then(res => {

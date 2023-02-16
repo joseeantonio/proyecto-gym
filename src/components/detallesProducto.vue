@@ -26,7 +26,7 @@ export default {
       producto:null,
     }
   },
-  async mounted() {
+  async created() {
     await gymApi.get(`productos/${this.$route.params.id}`)
         .then(res => {
           this.producto = res.data
