@@ -1,15 +1,16 @@
 <template>
   <main>
-
     <h1 v-if="this.$store.state.username" >Cesta de la compra de {{this.$store.state.username}}</h1>
     <div class="productos">
-      <div class="producto" v-for="producto in productos">
+      <div v-if="productos" class="producto" v-for="producto in productos">
         <router-link :to="`/producto/`+producto.id">
           <Producto :producto="producto"/>
         </router-link>
       </div>
+      <div v-else>
+        <h1>Cargando</h1>
+      </div>
     </div>
-
   </main>
 
 </template>
@@ -17,18 +18,24 @@
 <script>
 
 import gymApi from "@/api/gymApi";
+import Producto from "@/components/Producto.vue";
 
 export default {
 
-  components: {},
+  components: {Producto},
 
   data() {
     return {
       productos:null,
+      objetoEjemplo:{
+        id:"21414",
+        name:"hola",
+        image:"ggg"
+      }
     }
   },
   methods:{
-    getcarrito(){
+     getcarrito(){
       gymApi.get(`cestas/productosCesta/${this.$store.state.username}`)
           .then(res => {
             this.productos = res.data

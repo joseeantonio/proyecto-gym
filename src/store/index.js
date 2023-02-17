@@ -10,7 +10,6 @@ export default createStore({
     //MUTATIONS
     mutations:{
         loginUsername(state,username){
-            debugger
             state.username = username
             state.auth = true
         },

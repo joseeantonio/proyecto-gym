@@ -48,12 +48,10 @@ export default {
           password:this.password,
           username:this.username
         }
-        debugger
         gymApi.post(`users/autentificacion/`,datos)
             .then(res => {
               if (res.data.msg ==='registrado'){
                 this.$router.push('/listado')
-                debugger
                 this.setUsername()
                 console.log(this.$store.state.username)
               }else {
