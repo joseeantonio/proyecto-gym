@@ -9,7 +9,7 @@
         <h3>Precio : {{producto.size}}€</h3>
       </div>
     </section>
-    <button v-if="this.$store.state.username!==null" >+ Añadir a carrito</button>
+    <button @click="anadirCarrito()" >+ Añadir a carrito</button>
   </main>
 </template>
 
@@ -34,6 +34,16 @@ export default {
         .catch((e) => {
           console.log(e)
         })
+  },
+  methods:{
+    anadirCarrito(){debugger
+      gymApi.post(`/cestas/anadirProducto/cesta/${this.producto.id}*${this.$store.state.username}`)
+          .then(res =>  res.data)
+          .catch((e)=>{
+            console.log(e)
+          })
+
+    }
   }
 }
 </script>
