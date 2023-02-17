@@ -29,6 +29,7 @@
 
 <script>
 import gymApi from "@/api/gymApi";
+import Swal from "sweetalert2";
 
 export default {
 
@@ -74,7 +75,11 @@ export default {
             username:this.name
           }
           gymApi.post(`/users/`,datos)
-              .then(res => {this.productosHammer = res.data})
+              .then(res => {this.productosHammer = res.data
+                Swal.fire({
+                  title: `Te has registrado correctamente ${this.username}`,
+                  confirmButtonText: "Aceptar",
+                });})
               .catch((e)=>{
                 console.log(e)
               })

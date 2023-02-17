@@ -26,6 +26,7 @@
 <script>
 import gymApi from "@/api/gymApi";
 import router from "@/router/router";
+import Swal from "sweetalert2";
 
 export default {
 
@@ -53,13 +54,15 @@ export default {
               if (res.data.msg ==='registrado'){
                 this.$router.push('/listado')
                 this.setUsername()
-                console.log(this.$store.state.username)
               }else {
                 this.errores.push('Debes de registrarte')
               }
             })
       }
-
+      Swal.fire({
+        title: `${this.$store.state.username} has iniciado sesion`,
+        confirmButtonText: "Aceptar",
+      });
     },
     setUsername(){
       this.$store.commit('loginUsername',this.username)

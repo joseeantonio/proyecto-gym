@@ -4,9 +4,6 @@
       <div class="caja">
         <h1>{{this.$store.state.username}} ¿Quieres cambiar algo de tu perfil?</h1>
         <form class="formulario" @submit="checkForm">
-          <label type="name">Nombre de usuario</label>
-          <input type="text" v-model="name">
-
           <label type="email">Correo electronico</label>
           <input type="email" v-model="email">
 
@@ -28,13 +25,13 @@
 
 <script>
 import gymApi from "@/api/gymApi";
+import Swal from "sweetalert2";
 
 export default {
 
   data(){
     return{
       errores : [],
-      name : null,
       email : null,
       password : null,
       password_rep : null,
@@ -46,14 +43,10 @@ export default {
       this.errores = []
       let okey = true
 
-
-      if (!this.email && !this.name && !this.password){
+      if (!this.email && !this.password){
         this.errores.push('Complete al menos un campo.')
       }
       else {
-        if (this.name){
-          datos.name=this.name
-        }
         if (this.email){
           if (!/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/.test(this.email)){
             this.errores.push('Email incorrecto.')
@@ -73,9 +66,12 @@ export default {
         gymApi.patch(`/users/update/${this.$store.state.username}`,datos)
             .then(res => {
               if (res.data.msg==='actualizado'){
-                // this.setUsername()
-                //No se me guarda el username. en vuex.
-                this.$router.push('/login')
+                this.$router.push('/carrito')
+                //npm install --save sweetalert2       instalo la libreria de sweetalert para mostrar que ha sido registrado
+                Swal.fire({
+                  title: `Usuario ${this.$store.state.username} actualizado`,
+                  confirmButtonText: "Aceptar",
+                });
               }
             })
 
