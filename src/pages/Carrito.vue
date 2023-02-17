@@ -6,9 +6,8 @@
         <router-link :to="`/producto/`+producto.id">
           <Producto :producto="producto"/>
         </router-link>
-        <div>
-          <button @click="eliminar(producto.id)" ></button>
-        </div>
+        <h1>Cantidad : {{producto.cantidad}}</h1>
+        <button @click="eliminar(producto.id)" ></button>
       </div>
       <div v-else>
         <h1>Cargando</h1>
@@ -30,11 +29,6 @@ export default {
   data() {
     return {
       productos:null,
-      objetoEjemplo:{
-        id:"21414",
-        name:"hola",
-        image:"ggg"
-      }
     }
   },
   methods:{
@@ -42,19 +36,22 @@ export default {
       gymApi.get(`cestas/productosCesta/${this.$store.state.username}`)
           .then(res => {
             this.productos = res.data
+            console.log(res.data)
           })
           .catch((e) => {
             console.log(e)
           })
     },
     eliminar(productoid){
+       debugger
       gymApi.delete(`/cestas/anadirProducto/cesta/${productoid}*${this.$store.state.username}`)
-          .then(res => {
-            this.productos = res.data
-          })
+          .then(res =>
+             res.data
+          )
           .catch((e) => {
             console.log(e)
           })
+      this.getcarrito()
     }
   }
   ,
