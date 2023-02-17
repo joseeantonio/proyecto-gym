@@ -46,12 +46,12 @@ export default {
        debugger
       gymApi.delete(`/cestas/anadirProducto/cesta/${productoid}*${this.$store.state.username}`)
           .then(res =>
-             res.data
+          {res.data
+              this.getcarrito()}
           )
           .catch((e) => {
             console.log(e)
           })
-      this.getcarrito()
     }
   }
   ,
