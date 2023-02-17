@@ -36,7 +36,7 @@ export default {
         })
   },
   methods:{
-    anadirCarrito(){debugger
+    anadirCarrito(){
       gymApi.post(`/cestas/anadirProducto/cesta/${this.producto.id}*${this.$store.state.username}`)
           .then(res =>  res.data)
           .catch((e)=>{

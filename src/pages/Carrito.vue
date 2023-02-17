@@ -43,11 +43,11 @@ export default {
           })
     },
     eliminar(productoid){
-       debugger
       gymApi.delete(`/cestas/anadirProducto/cesta/${productoid}*${this.$store.state.username}`)
           .then(res =>
-          {res.data
-              this.getcarrito()}
+          {console.log(res.data)
+            this.productos = res.data
+          }
           )
           .catch((e) => {
             console.log(e)
