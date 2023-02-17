@@ -76,10 +76,13 @@ export default {
           }
           gymApi.post(`/users/`,datos)
               .then(res => {this.productosHammer = res.data
+                const self=this
                 Swal.fire({
-                  title: `Te has registrado correctamente ${this.username}`,
+                  title: `Te has registrado correctamente ${self.username}`,
                   confirmButtonText: "Aceptar",
-                });})
+                });
+                this.$router.push('/login')
+              })
               .catch((e)=>{
                 console.log(e)
               })
