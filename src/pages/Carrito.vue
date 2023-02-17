@@ -6,6 +6,9 @@
         <router-link :to="`/producto/`+producto.id">
           <Producto :producto="producto"/>
         </router-link>
+        <div>
+          <button @click="eliminar(producto.id)" ></button>
+        </div>
       </div>
       <div v-else>
         <h1>Cargando</h1>
@@ -37,6 +40,15 @@ export default {
   methods:{
      getcarrito(){
       gymApi.get(`cestas/productosCesta/${this.$store.state.username}`)
+          .then(res => {
+            this.productos = res.data
+          })
+          .catch((e) => {
+            console.log(e)
+          })
+    },
+    eliminar(productoid){
+      gymApi.delete(`/cestas/anadirProducto/cesta/${productoid}*${this.$store.state.username}`)
           .then(res => {
             this.productos = res.data
           })
