@@ -1,5 +1,4 @@
 <template>
-
   <main>
     <section v-if="producto">
       <img :src="producto.image" alt="">
@@ -9,13 +8,14 @@
         <h3>Precio : {{producto.size}}€</h3>
       </div>
     </section>
-    <button @click="anadirCarrito()" >+ Añadir a carrito</button>
+    <button :disabled="loading"  @click="confirmarAnadir()" >+ Añadir a carrito</button>
   </main>
 </template>
 
 <script>
 
 import gymApi from "@/api/gymApi";
+import Swal from "sweetalert2";
 
 export default {
 
@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       producto:null,
+      loading:false,
     }
   },
   async created() {
@@ -37,12 +38,34 @@ export default {
   },
   methods:{
     anadirCarrito(){
+      this.loading=true
       gymApi.post(`/cestas/anadirProducto/cesta/${this.producto.id}*${this.$store.state.username}`)
-          .then(res =>  res.data)
+          .then(res => {
+                res.data
+            this.loading=false
+              }
+          )
           .catch((e)=>{
             console.log(e)
           })
 
+    },
+    confirmarAnadir(){
+      Swal
+          .fire({
+            title: `${this.producto.name}`,
+            text: "¿Añadir a carrito?",
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonText: "Sí, añadir",
+            cancelButtonText: "Cancelar",
+          })
+          .then(resultado => {
+            if (resultado.value) {
+              // Hicieron click en "Sí"
+              this.anadirCarrito()
+            }
+          });
     }
   }
 }
