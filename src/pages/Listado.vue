@@ -4,24 +4,19 @@
       <div class="marca"> <router-link to="/productos/Hammer"><h1>Hammer</h1></router-link></div>
       <div class="marca"> <router-link to="/productos/Matrix"><h1>Matrix</h1></router-link></div>
     </div>
-    <div class="productos">
-      <div v-if="matrix && !hammer" class="producto" v-for="producto in productosMatrix">
-        <router-link :to="`/producto/`+producto.id">
-          <Producto :producto="producto"/>
-        </router-link>
+    <div v-if="loading" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
-      <div v-if="!matrix && hammer" class="producto" v-for="producto in productosHammer">
-        <router-link :to="`/producto/`+producto.id">
-          <Producto :producto="producto"/>
-        </router-link>
-      </div>
-      <div v-else class="producto" v-for="producto in productos">
+    </div>
+    <div v-else class="productos">
+      <div class="producto" v-for="producto in productos">
         <router-link :to="`/producto/`+producto.id">
           <Producto :producto="producto"/>
         </router-link>
       </div>
     </div>
-    <div v-if="limite<39" class="div-boton">
+    <div v-if="limite<39 && !loading" class="div-boton">
       <button @click="cargarMas">Cargar mas</button>
     </div>
   </main>
@@ -38,6 +33,7 @@ export default {
 
   data() {
     return {
+      loading:true,
       todosLosProductos:null,
       productos:null,
       limite:12,
@@ -52,6 +48,7 @@ export default {
       this.limite += 12
     },
     async getApi(){
+
       gymApi.get(`/productos/paginacion/${this.limite}`)
           .then(res => {this.productos = res.data})
           .catch((e)=>{
@@ -68,17 +65,9 @@ export default {
   }
   ,
   created() {
-    gymApi.get(`/productos/marca/Hammer`)
-        .then(res => {this.productosHammer = res.data})
-        .catch((e)=>{
-          console.log(e)
-        })
-    gymApi.get(`/productos/marca/Matrix`)
-        .then(res => {this.productosMatrix = res.data})
-        .catch((e)=>{
-          console.log(e)
-        })
+    this.loading=true
     this.getApi()
+    this.loading=false
   },
 
 }
