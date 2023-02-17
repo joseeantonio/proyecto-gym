@@ -60,8 +60,8 @@ export default {
             })
       }
       Swal.fire({
-        title: `${this.$store.state.username} has iniciado sesion`,
-        confirmButtonText: "Aceptar",
+        title: `Has iniciado sesion`,
+        confirmButtonText: "OK",
       });
     },
     setUsername(){
