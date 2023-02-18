@@ -1,6 +1,11 @@
 <template>
   <main>
-    <div class="caja-de-fuera">
+    <div v-if="loading" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div v-else class="caja-de-fuera">
         <div class="caja">
           <h1>REGISTRO</h1>
           <form class="formulario" @submit="checkForm">
@@ -41,10 +46,12 @@ export default {
       password : null,
       password_rep : null,
       terminos : null,
+      loading:false,
     }
   },
   methods:{
     checkForm(e) {
+      this.loading=true
       this.errores = []
       let okey = true
       if (!this.name || !this.email || !this.password || !this.password_rep){
@@ -64,6 +71,7 @@ export default {
               okey = false
             }
           }
+          debugger
       }
       if (okey === true){
         if (!this.terminos){
@@ -76,6 +84,7 @@ export default {
           }
           gymApi.post(`/users/`,datos)
               .then(res => {this.productosHammer = res.data
+                debugger
                 Swal.fire({
                   title: `Te has registrado correctamente`,
                   confirmButtonText: "OK",
@@ -87,6 +96,7 @@ export default {
               })
         }
       }
+      this.loading=false
     },
   }
 
