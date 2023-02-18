@@ -16,7 +16,7 @@
         <router-link :to="`/producto/`+producto.id">
           <Producto :producto="producto"/>
         </router-link>
-        <h1>Cantidad : {{producto.cantidad}}</h1>
+        <h1 class="cantidad" >Cantidad : {{producto.cantidad}}</h1>
         <button @click="confirmarEliminar(producto)" ><i class="fa fa-trash" aria-hidden="true"></i>
         </button>
       </div>
@@ -110,6 +110,9 @@ main>h1{
   font-size: 60px;
   text-align: center;
   padding: 20px;
+}
+.cantidad{
+  margin: 20px 20px 10px;
 }
 .productos{
   display: grid;

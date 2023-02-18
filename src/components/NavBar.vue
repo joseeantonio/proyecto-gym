@@ -34,6 +34,10 @@ methods:{
     color: white;
   }
 
+  a{
+    text-decoration: none;
+  }
+
   header img {
     margin: 7px;
     max-height: 54px;

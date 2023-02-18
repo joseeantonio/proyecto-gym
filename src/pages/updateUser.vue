@@ -63,19 +63,19 @@ export default {
             datos.password=this.password
           }
         }
-        gymApi.patch(`/users/update/${this.$store.state.username}`,datos)
-            .then(res => {
-              if (res.data.msg==='actualizado'){
-                this.$router.push('/carrito')
-                //npm install --save sweetalert2       instalo la libreria de sweetalert para mostrar que ha sido registrado
-                Swal.fire({
-                  title: `Usuario ${this.$store.state.username} actualizado`,
-                  confirmButtonText: "Aceptar",
-                });
-              }
-            })
-
-
+        if (okey){
+          gymApi.patch(`/users/update/${this.$store.state.username}`,datos)
+              .then(res => {
+                if (res.data.msg==='actualizado'){
+                  this.$router.push('/carrito')
+                  //npm install --save sweetalert2       instalo la libreria de sweetalert para mostrar que ha sido registrado
+                  Swal.fire({
+                    title: `Usuario ${this.$store.state.username} actualizado`,
+                    confirmButtonText: "Aceptar",
+                  });
+                }
+              })
+        }
       }
 
       // console.log(datos)

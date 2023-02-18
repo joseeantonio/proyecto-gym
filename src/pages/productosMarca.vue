@@ -142,6 +142,9 @@ main{
   min-height: 700px;
   background-color: rgba(0, 0, 0, 0.61);
 }
+a{
+  text-decoration: none;
+}
 .marca{
   padding: 100px;
   text-align: center;

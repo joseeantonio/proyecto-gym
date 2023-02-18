@@ -1,5 +1,8 @@
 <template>
   <main>
+    <div class="flecha" >
+      <router-link to="/listado"><i class="fas fa-reply"></i></router-link>
+    </div>
     <section v-if="producto">
       <img :src="producto.image" alt="">
       <div>
@@ -96,6 +99,14 @@ p{
 }
 button{
   margin-left: 45%;
+}
+.fas{
+  color: white;
+  font-size: 80px;
+}
+.flecha{
+  padding-top: 50px;
+  padding-left: 80px;
 }
 
 </style>

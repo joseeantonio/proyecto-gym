@@ -34,6 +34,7 @@ img{
 h1{
   color: white;
   margin: 10px;
+  font-size: 30px;
 }
 
 </style>
