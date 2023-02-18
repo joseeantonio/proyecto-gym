@@ -4,7 +4,7 @@
       <nav>
         <img src="/src/images/img.png">
         <ul>
-          <li><router-link to="/updatePerfil">PERFIL</router-link></li>
+          <li v-if="this.$store.state.username" ><router-link to="/updatePerfil">ACTUALIZAR PERFIL</router-link></li>
           <li><router-link to="/listado">MAQUINAS</router-link></li>
           <li v-if="this.$store.state.username" ><router-link to="/carrito">CARRITO</router-link></li>
           <li v-if="this.$store.state.username" ><button @click="cerrarSesion" >CERRAR SESION</button></li>
