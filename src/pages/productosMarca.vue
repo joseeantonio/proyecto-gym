@@ -3,7 +3,7 @@
     <div class="marca"><h1>{{this.$route.params.marca}}</h1></div>
     <section class="filtros">
       <div class="busqueda">
-          <input class="input-busqueda" v-model="busqueda" type="search" placeholder="Buscar" />
+          <input v-on:keyup.enter="buscando" class="input-busqueda" v-model="busqueda" type="search" placeholder="Buscar" />
         <button @click="buscando" class="btn btn-primary">
           <i class="fas fa-search"></i>
         </button>
