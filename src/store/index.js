@@ -13,7 +13,7 @@ export default createStore({
             state.username = username
             state.auth = true
         },
-        logoutUsername(state,username){
+        logoutUsername(state){
             state.username = null
             state.auth = false
         }

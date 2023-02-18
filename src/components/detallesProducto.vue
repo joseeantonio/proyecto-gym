@@ -62,7 +62,6 @@ export default {
           })
           .then(resultado => {
             if (resultado.value) {
-              // Hicieron click en "Sí"
               this.anadirCarrito()
             }
           });

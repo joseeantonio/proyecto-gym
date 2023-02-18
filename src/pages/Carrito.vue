@@ -17,7 +17,7 @@
           <Producto :producto="producto"/>
         </router-link>
         <h1>Cantidad : {{producto.cantidad}}</h1>
-        <button @click="eliminar(producto.id)" ><i class="fa fa-trash" aria-hidden="true"></i>
+        <button @click="confirmarEliminar(producto)" ><i class="fa fa-trash" aria-hidden="true"></i>
         </button>
       </div>
       <div v-else>
@@ -32,6 +32,7 @@
 
 import gymApi from "@/api/gymApi";
 import Producto from "@/components/Producto.vue";
+import Swal from "sweetalert2";
 
 export default {
 
@@ -70,6 +71,22 @@ export default {
     },
     irAProductos(){
       this.$router.push('/listado')
+    },
+    confirmarEliminar(producto){
+      Swal
+          .fire({
+            title: `${producto.name}`,
+            text: "¿Quieres eliminarlo del carrito?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar",
+          })
+          .then(resultado => {
+            if (resultado.value) {
+              this.eliminar(producto.id)
+            }
+          });
     }
   }
   ,

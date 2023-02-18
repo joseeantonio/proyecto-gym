@@ -54,15 +54,15 @@ export default {
               if (res.data.msg ==='registrado'){
                 this.$router.push('/listado')
                 this.setUsername()
+                Swal.fire({
+                  title: `Has iniciado sesion`,
+                  confirmButtonText: "OK",
+                });
               }else {
                 this.errores.push('Debes de registrarte')
               }
             })
       }
-      Swal.fire({
-        title: `Has iniciado sesion`,
-        confirmButtonText: "OK",
-      });
     },
     setUsername(){
       this.$store.commit('loginUsername',this.username)

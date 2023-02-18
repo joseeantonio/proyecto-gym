@@ -7,6 +7,7 @@
           <li><router-link to="/updatePerfil">PERFIL</router-link></li>
           <li><router-link to="/listado">MAQUINAS</router-link></li>
           <li><router-link to="/carrito">CARRITO</router-link></li>
+          <li v-if="this.$store.state.username" ><button @click="cerrarSesion" >CERRAR SESION</button></li>
           <li v-if="!this.$store.state.username" ><router-link to="/login">INICIAR SESION</router-link></li>
           <li v-if="!this.$store.state.username" ><router-link to="/register">REGISTRARME</router-link></li>
         </ul>
@@ -17,7 +18,12 @@
 
 <script>
 export default {
-
+methods:{
+  cerrarSesion(){
+      this.$store.commit('logoutUsername')
+    this.$router.push('/login')
+}
+}
 }
 </script>
 
@@ -58,6 +64,13 @@ export default {
 
   header>section>nav>ul>li{
     margin: 27px;
+  }
+
+  button{
+    border-radius: 5px;
+    background-color: white;
+    padding: 8px;
+    margin: -8px;
   }
 
 
