@@ -8,7 +8,8 @@
       </div>
     </div>
     <div class="carrito-vacio" v-else-if="productos===null ||productos.length===0">
-      <h1>AÑADE ALGO A LA CESTA </h1>
+      <h1>AÑADE ALGO A LA CESTA</h1>
+      <button @click="irAProductos" class="boton-ir" >IR</button>
     </div>
     <div v-else class="productos">
       <div v-if="productos" class="producto" v-for="producto in productos">
@@ -66,6 +67,9 @@ export default {
           .catch((e) => {
             console.log(e)
           })
+    },
+    irAProductos(){
+      this.$router.push('/listado')
     }
   }
   ,
@@ -101,9 +105,17 @@ main>h1{
 .carrito-vacio{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }
 .carrito-vacio>h1{
-  margin: 150px;
+  margin: 150px 150px 80px;
   font-size: 30px;
+}
+.boton-ir{
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  margin: 0 auto;
 }
 </style>
