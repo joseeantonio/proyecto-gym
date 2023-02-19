@@ -1,7 +1,6 @@
 <template>
   <main>
     <h1 v-if="this.$store.state.username" >Cesta de la compra de {{this.$store.state.username}}</h1>
-
     <div v-if="loading" class="d-flex justify-content-center">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -25,7 +24,6 @@
       </div>
     </div>
   </main>
-
 </template>
 
 <script>
@@ -35,9 +33,7 @@ import Producto from "@/components/Producto.vue";
 import Swal from "sweetalert2";
 
 export default {
-
   components: {Producto},
-
   data() {
     return {
       productos:null,
@@ -95,10 +91,8 @@ export default {
     this.getcarrito()
     this.loading=false
   }
-
 }
 </script>
-
 
 
 <style scoped>

@@ -75,7 +75,6 @@ export default {
 
 
 <style scoped>
-
 input{
   width: 300px;
   text-align: center;
@@ -83,20 +82,16 @@ input{
 label{
   width: 300px;
 }
-
 main>div>div>h1{
   text-align: center;
   margin: 30px;
 }
-
 .caja-de-fuera{
   padding-top: 150px;
 }
-
 .error{
   color: red;
 }
-
 .caja{
   display: flex;
   justify-content: center;
@@ -110,8 +105,6 @@ main{
   min-height: 700px;
   background-color: rgba(0, 0, 0, 0.61);
 }
-
-
 .formulario{
   display: flex;
   justify-content: center;

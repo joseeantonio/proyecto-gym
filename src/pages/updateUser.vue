@@ -26,9 +26,7 @@
 <script>
 import gymApi from "@/api/gymApi";
 import Swal from "sweetalert2";
-
 export default {
-
   data(){
     return{
       errores : [],
@@ -77,18 +75,14 @@ export default {
               })
         }
       }
-
-      // console.log(datos)
     },
     setUsername(){
       debugger
       this.$store.commit('setUsername',this.name)
     },
   },
-
 }
 </script>
-
 
 
 <style scoped>
@@ -96,7 +90,6 @@ export default {
   color: red;
   font-weight: bolder;
 }
-
 input{
   width: 300px;
   text-align: center;

@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <ul>
       <li v-for="producto in productos">
@@ -7,22 +6,18 @@
       </li>
     </ul>
   </div>
-
 </template>
 
 <script>
 export default {
-
   props: {
     productos: {
       type: Array,
       required: true,
     }
   }
-
 }
 </script>
-
 
 
 <style scoped>

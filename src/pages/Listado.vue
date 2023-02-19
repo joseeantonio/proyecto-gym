@@ -20,17 +20,13 @@
       <button @click="cargarMas">Cargar mas</button>
     </div>
   </main>
-
 </template>
 
 <script>
 import gymApi from "@/api/gymApi";
 import Producto from "@/components/Producto.vue";
-
 export default {
-
   components: {Producto},
-
   data() {
     return {
       loading:true,
@@ -48,7 +44,6 @@ export default {
       this.limite += 12
     },
     async getApi(){
-
       gymApi.get(`/productos/paginacion/${this.limite}`)
           .then(res => {this.productos = res.data})
           .catch((e)=>{
@@ -69,14 +64,12 @@ export default {
     this.getApi()
     this.loading=false
   },
-
 }
 </script>
 
 
 
 <style scoped>
-
 main{
   min-height: 700px;
   background-color: rgba(0, 0, 0, 0.61);
@@ -84,7 +77,6 @@ main{
 a{
   text-decoration: none;
 }
-
 .marcas{
   display: flex;
   justify-content: center;
@@ -96,14 +88,12 @@ a{
   font-size: 70px;
   color: black;
 }
-
 button{
   width: 120px;
   height: 20px;
   display: flex;
   margin: 20px auto;
 }
-
 .productos{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -115,5 +105,4 @@ button{
 .div-boton{
   padding: 10px;
 }
-
 </style>

@@ -6,18 +6,14 @@
 </template>
 
 <script>
-
 export default {
-
   props:{
     producto: {
       type:Object,
       required:true,
     }
   },
-
   components: {},
-
   data() {
     return {
     }
@@ -36,5 +32,4 @@ h1{
   margin: 10px;
   font-size: 30px;
 }
-
 </style>

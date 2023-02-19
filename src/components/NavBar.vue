@@ -22,32 +22,27 @@ methods:{
   cerrarSesion(){
       this.$store.commit('logoutUsername')
     this.$router.push('/login')
-}
-}
+    }
+  }
 }
 </script>
-
 
 
 <style scoped>
   header>section>nav>ul>li>a{
     color: white;
   }
-
   a{
     text-decoration: none;
   }
-
   header img {
     margin: 7px;
     max-height: 54px;
   }
-
   nav {
     width: 100%;
     height: 100%;
   }
-
   section{
     height: 63px;
     display: flex;
@@ -55,27 +50,21 @@ methods:{
     align-items: center;
     background-color: black;
   }
-
   header>section>nav{
     display: flex;
   }
-
   header>section>nav>ul{
     display: flex;
     width: 100%;
     justify-content: end;
   }
-
   header>section>nav>ul>li{
     margin: 27px;
   }
-
   button{
     border-radius: 5px;
     background-color: white;
     padding: 8px;
     margin: -8px;
   }
-
-
 </style>

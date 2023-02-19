@@ -16,14 +16,10 @@
 </template>
 
 <script>
-
 import gymApi from "@/api/gymApi";
 import Swal from "sweetalert2";
-
 export default {
-
   components: {},
-
   data() {
     return {
       producto:null,
@@ -40,6 +36,7 @@ export default {
         })
   },
   methods:{
+    //llamada a la api para que me añada el producto a el carrito de ese usuario almacenado en el backend
     anadirCarrito(){
       this.loading=true
       gymApi.post(`/cestas/anadirProducto/cesta/${this.producto.id}*${this.$store.state.username}`)
@@ -51,7 +48,6 @@ export default {
           .catch((e)=>{
             console.log(e)
           })
-
     },
     confirmarAnadir(){
       Swal

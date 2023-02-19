@@ -35,9 +35,7 @@
 <script>
 import gymApi from "@/api/gymApi";
 import Swal from "sweetalert2";
-
 export default {
-
   data(){
     return{
       errores : [],
@@ -99,7 +97,6 @@ export default {
       this.loading=false
     },
   }
-
 }
 </script>
 
@@ -110,7 +107,6 @@ export default {
     color: red;
     font-weight: bolder;
   }
-
   input{
     width: 300px;
     text-align: center;

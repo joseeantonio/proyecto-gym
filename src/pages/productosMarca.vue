@@ -35,7 +35,6 @@
     <div class="productos">
       <div v-if="estadoBusqueda" class="producto" v-for="producto in productosBusqueda">
         <Producto :producto="producto"/>
-<!--        Controlar si la busqueda no devuelve ningun objeto-->
       </div>
       <div v-else-if="this.peso===null && this.precio===null" class="producto" v-for="producto in productos">
         <Producto :producto="producto"/>
@@ -51,14 +50,10 @@
 </template>
 
 <script>
-
 import gymApi from "@/api/gymApi";
 import Producto from "@/components/Producto.vue";
-
 export default {
-
   components: {Producto},
-
   data() {
     return {
       productos:null,
@@ -135,7 +130,6 @@ export default {
 </script>
 
 
-
 <style scoped>
 
 main{
@@ -153,14 +147,12 @@ a{
   font-size: 70px;
   color: black;
 }
-
 button{
   width: 120px;
   height: 20px;
   display: flex;
   margin: 20px auto;
 }
-
 .productos{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -187,5 +179,4 @@ button{
   display: flex;
   justify-content: center;
 }
-
 </style>
