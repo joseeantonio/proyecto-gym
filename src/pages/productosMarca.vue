@@ -1,5 +1,5 @@
 <template>
-  <main v-if="productos">
+  <main v-if="!cargando">
     <div class="marca"><h1>{{this.$route.params.marca}}</h1></div>
     <section class="filtros">
       <div class="busqueda">
@@ -77,6 +77,7 @@ export default {
   },
   methods: {
     async getApi() {
+      this.cargando = true
       if (this.peso!==null && this.precio===null){
         gymApi.get(`productos/marca/${this.$route.params.marca}/category/${this.peso}`)
             .then(res => {
@@ -85,6 +86,7 @@ export default {
             .catch((e) => {
               console.log(e)
             })
+            .finally(()=> this.cargando = false)
       }
       else if (this.peso===null && this.precio!==null){
         gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
@@ -94,6 +96,7 @@ export default {
             .catch((e) => {
               console.log(e)
             })
+            .finally(()=> this.cargando = false)
       }else if (this.peso!==null && this.precio!==null){
         gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
             .then(res => {
@@ -101,7 +104,6 @@ export default {
               let peso = this.peso.replace('-',' ')
               let lista = []
               for (let i=0;i<listaPrecio.length;i++){
-                debugger
                 if (listaPrecio[i].category===peso){
                   lista.push(listaPrecio[i])
                 }
@@ -111,6 +113,7 @@ export default {
             .catch((e) => {
               console.log(e)
             })
+            .finally(()=> this.cargando = false)
       }
     },
     reset(){
@@ -121,6 +124,7 @@ export default {
       this.busqueda = null
     },
     buscando(){
+      this.cargando = true
       this.estadoBusqueda=true
       gymApi.get(`productos/marca/${this.$route.params.marca}/busqueda/${this.busqueda}`)
           .then(res => {
@@ -129,6 +133,7 @@ export default {
           .catch((e) => {
             console.log(e)
           })
+          .finally(()=> this.cargando = false)
     },
   },
   watch:{
@@ -142,6 +147,7 @@ export default {
   ,
   created() {
     this.getApi()
+    this.cargando = true
     gymApi.get(`productos/marca/${this.$route.params.marca}`)
         .then(res => {
           this.productos = res.data
@@ -149,12 +155,21 @@ export default {
         .catch((e) => {
           console.log(e)
         })
+        .finally(()=> this.cargando = false)
   }
 }
 </script>
 
 
 <style scoped>
+
+
+input[type=radio]{
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  left: 15px;
+}
 
 .div-cargando{
   height: 700px;
@@ -164,6 +179,24 @@ export default {
   display: flex;
   justify-content: center;
   margin: 40px;
+}
+.filtros>div>div>div{
+  margin-bottom: 10px;
+}
+
+.filtros-categoria-peso>*{
+  margin: 30px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.filtros-categoria-peso h4 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.precio{
+  margin-right: 140px;
 }
 
 
