@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="productos">
     <div class="marca"><h1>{{this.$route.params.marca}}</h1></div>
     <section class="filtros">
       <div class="busqueda">
@@ -8,26 +8,28 @@
           <i class="fas fa-search"></i>
         </button>
       </div>
-      <div v-if="peso===null && estadoBusqueda!==true" class="precio">
-        <h4>Precio:</h4>
-        <div>
-          <input v-model="precio" type="radio" value="alto-bajo" name="precio">
-          <label >De Mayor a Menor</label>
+      <div class="filtros-categoria-peso">
+        <div class="precio">
+          <h4>Precio:</h4>
+          <div>
+            <input v-model="precio" type="radio" value="alto-bajo" name="precio">
+            <label >De Mayor a Menor</label>
+          </div>
+          <div>
+            <input v-model="precio" type="radio" value="bajo-alto" name="precio">
+            <label >De Menor a Mayor</label>
+          </div>
         </div>
-        <div>
-          <input v-model="precio" type="radio" value="bajo-alto" name="precio">
-          <label >De Menor a Mayor</label>
-        </div>
-      </div>
-      <div v-if="estadoBusqueda!==true" class="categoria" >
-        <h4>Categoria:</h4>
-        <div>
-          <input @click="resetPrecio" v-model="peso" type="radio" value="peso-libre" name="peso">
-          <label >Peso Libre</label>
-        </div>
-        <div>
-          <input @click="resetPrecio" v-model="peso" type="radio" value="peso-guiado" name="peso">
-          <label >Peso Guiado</label>
+        <div class="categoria" >
+          <h4>Categoria:</h4>
+          <div>
+            <input v-model="peso" type="radio" value="peso-libre" name="categoria">
+            <label >Peso Libre</label>
+          </div>
+          <div>
+            <input v-model="peso" type="radio" value="peso-guiado" name="categoria">
+            <label >Peso Guiado</label>
+          </div>
         </div>
       </div>
       <button class="reset" @click="reset">Restablecer Filtros</button>
@@ -39,12 +41,16 @@
       <div v-else-if="this.peso===null && this.precio===null" class="producto" v-for="producto in productos">
         <Producto :producto="producto"/>
       </div>
-      <div v-else-if="this.precio!==null" class="producto" v-for="producto in productosPrecio">
+      <div v-else class="producto" v-for="producto in productosFiltro">
         <Producto :producto="producto"/>
       </div>
-      <div v-else class="producto" v-for="producto in productosCategory">
-        <Producto :producto="producto"/>
-      </div>
+    </div>
+  </main>
+  <main v-else>
+    <div class="div-cargando">
+      <loading v-model:active="cargando"
+               :can-cancel="true"
+               :is-full-page="true"/>
     </div>
   </main>
 </template>
@@ -52,36 +58,60 @@
 <script>
 import gymApi from "@/api/gymApi";
 import Producto from "@/components/Producto.vue";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
-  components: {Producto},
+  components: {Producto,Loading},
   data() {
     return {
+      cargando:true,
       productos:null,
-      productosCategory:null,
       peso:null,
-      productosPrecio:null,
       precio:null,
       busqueda:null,
       estadoBusqueda:false,
       productosBusqueda:null,
+      productosFiltro: null,
+      spinnerColor: '#00000'
     }
   },
   methods: {
     async getApi() {
-      gymApi.get(`productos/marca/${this.$route.params.marca}/category/${this.peso}`)
-          .then(res => {
-            this.productosCategory = res.data
-          })
-          .catch((e) => {
-            console.log(e)
-          })
-      gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
-          .then(res => {
-            this.productosPrecio = res.data
-          })
-          .catch((e) => {
-            console.log(e)
-          })
+      if (this.peso!==null && this.precio===null){
+        gymApi.get(`productos/marca/${this.$route.params.marca}/category/${this.peso}`)
+            .then(res => {
+              this.productosFiltro = res.data
+            })
+            .catch((e) => {
+              console.log(e)
+            })
+      }
+      else if (this.peso===null && this.precio!==null){
+        gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
+            .then(res => {
+              this.productosFiltro = res.data
+            })
+            .catch((e) => {
+              console.log(e)
+            })
+      }else if (this.peso!==null && this.precio!==null){
+        gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
+            .then(res => {
+              const listaPrecio = res.data
+              let peso = this.peso.replace('-',' ')
+              let lista = []
+              for (let i=0;i<listaPrecio.length;i++){
+                debugger
+                if (listaPrecio[i].category===peso){
+                  lista.push(listaPrecio[i])
+                }
+              }
+              this.productosFiltro = lista
+            })
+            .catch((e) => {
+              console.log(e)
+            })
+      }
     },
     reset(){
       this.precio = null
@@ -90,12 +120,8 @@ export default {
       this.productosBusqueda=null
       this.busqueda = null
     },
-    resetPrecio(){
-      this.precio = null
-    },
     buscando(){
       this.estadoBusqueda=true
-      debugger
       gymApi.get(`productos/marca/${this.$route.params.marca}/busqueda/${this.busqueda}`)
           .then(res => {
             this.productosBusqueda = res.data
@@ -107,11 +133,9 @@ export default {
   },
   watch:{
     peso(){
-      debugger
       this.getApi()
     },
     precio(){
-      debugger
       this.getApi()
     }
   }
@@ -131,6 +155,17 @@ export default {
 
 
 <style scoped>
+
+.div-cargando{
+  height: 700px;
+}
+
+.filtros-categoria-peso{
+  display: flex;
+  justify-content: center;
+  margin: 40px;
+}
+
 
 main{
   min-height: 700px;
