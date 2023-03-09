@@ -2,7 +2,7 @@
   <header>
     <section>
       <nav>
-        <img src="/src/images/img.png">
+        <img src="/src/assets/images/img.png">
         <ul>
           <li v-if="this.$store.state.username" ><router-link to="/updatePerfil">ACTUALIZAR PERFIL</router-link></li>
           <li><router-link to="/listado">MAQUINAS</router-link></li>

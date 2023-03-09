@@ -82,11 +82,11 @@ export default {
         gymApi.get(`productos/marca/${this.$route.params.marca}/category/${this.peso}`)
             .then(res => {
               this.productosFiltro = res.data
+              this.cargando = false
             })
             .catch((e) => {
               console.log(e)
             })
-            .finally(()=> this.cargando = false)
       }
       else if (this.peso===null && this.precio!==null){
         gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
@@ -109,11 +109,13 @@ export default {
                 }
               }
               this.productosFiltro = lista
+              this.cargando = false
             })
             .catch((e) => {
               console.log(e)
             })
-            .finally(()=> this.cargando = false)
+      }else{
+        this.cargando = false
       }
     },
     reset(){
@@ -122,6 +124,7 @@ export default {
       this.estadoBusqueda=false
       this.productosBusqueda=null
       this.busqueda = null
+      this.cargando = false
     },
     buscando(){
       this.cargando = true
@@ -173,6 +176,15 @@ input[type=radio]{
 
 .div-cargando{
   height: 700px;
+}
+
+.reset{
+  padding-bottom: 50px;
+  padding-top: 15px;
+  font-size: 20px;
+  border-radius: 6px;
+  color: white;
+  background-color: black;
 }
 
 .filtros-categoria-peso{
