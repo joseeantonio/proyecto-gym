@@ -92,6 +92,7 @@ export default {
         gymApi.get(`productos/marca/${this.$route.params.marca}/${this.precio}`)
             .then(res => {
               this.productosFiltro = res.data
+              this.cargando = false
             })
             .catch((e) => {
               console.log(e)

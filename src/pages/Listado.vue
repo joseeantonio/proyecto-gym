@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="!cargando">
     <div class="marcas">
       <div class="marca"> <router-link to="/productos/Hammer"><h1>Hammer</h1></router-link></div>
       <div class="marca"> <router-link to="/productos/Matrix"><h1>Matrix</h1></router-link></div>
@@ -20,16 +20,24 @@
       <button @click="cargarMas">Cargar mas</button>
     </div>
   </main>
+  <main v-else>
+    <div class="div-cargando">
+      <loading v-model:active="cargando"
+               :can-cancel="true"
+               :is-full-page="true"/>
+    </div>
+  </main>
 </template>
 
 <script>
 import gymApi from "@/api/gymApi";
 import Producto from "@/components/Producto.vue";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
-  components: {Producto},
+  components: {Producto,Loading},
   data() {
     return {
-      loading:true,
       todosLosProductos:null,
       productos:null,
       limite:12,
@@ -37,6 +45,7 @@ export default {
       hammer:null,
       productosMatrix:null,
       matrix:null,
+      cargando:true,
     }
   },
   methods:{
@@ -45,7 +54,8 @@ export default {
     },
     async getApi(){
       gymApi.get(`/productos/paginacion/${this.limite}`)
-          .then(res => {this.productos = res.data})
+          .then(res => {this.productos = res.data
+            this.cargando = false})
           .catch((e)=>{
             console.log(e)
           })
@@ -60,9 +70,7 @@ export default {
   }
   ,
   created() {
-    this.loading=true
     this.getApi()
-    this.loading=false
   },
 }
 </script>
