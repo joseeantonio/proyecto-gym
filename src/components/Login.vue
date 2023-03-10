@@ -62,6 +62,14 @@ export default {
                 this.errores.push('Debes de registrarte')
               }
             })
+        gymApi.get(`cestas/productosCesta/${this.username}`)
+            .then(res => {
+              console.log(res.data.length)
+              this.$store.commit('setCantidad',res.data.length)
+            })
+            .catch((e) => {
+              console.log(e)
+            })
       }
     },
     setUsername(){

@@ -17,7 +17,7 @@
       </div>
     </div>
     <div v-if="limite<39 && !loading" class="div-boton">
-      <button class="cargar-mas" @click="cargarMas"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      <button  @click="cargarMas"><i class="fa fa-plus" aria-hidden="true"></i></button>
     </div>
   </main>
   <main v-else>
@@ -60,7 +60,7 @@ export default {
           .catch((e)=>{
             console.log(e)
           })
-    }
+    },
   }
   ,
   watch:{

@@ -59,6 +59,7 @@ export default {
           {console.log(res.data)
             this.productos = res.data
             this.loading=false
+            this.$store.commit('setCantidad',res.data.length)
           }
           )
           .catch((e) => {

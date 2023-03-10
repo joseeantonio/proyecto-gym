@@ -18,6 +18,7 @@
 <script>
 import gymApi from "@/api/gymApi";
 import Swal from "sweetalert2";
+import data from "bootstrap/js/src/dom/data";
 export default {
   components: {},
   data() {
@@ -41,7 +42,9 @@ export default {
       this.loading=true
       gymApi.post(`/cestas/anadirProducto/cesta/${this.producto.id}*${this.$store.state.username}`)
           .then(res => {
-                res.data
+            debugger
+            console.log(res.data)
+            this.$store.commit('setCantidad',res.data.productos.length)
             this.loading=false
               }
           )

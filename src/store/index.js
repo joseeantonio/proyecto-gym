@@ -5,6 +5,7 @@ export default createStore({
     state:{
         username:null,
         auth:null,
+        cantidad:null
     },
     //MUTATIONS
     mutations:{
@@ -16,6 +17,9 @@ export default createStore({
         logoutUsername(state){
             state.username = null
             state.auth = false
+        },
+        setCantidad(state,cantidad){
+            state.cantidad = cantidad
         }
     },
     //ACTIONS
