@@ -12,6 +12,8 @@
 
           <input class="btn btn-dark" type="submit" value="INICIAR SESION">
 
+          <router-link to="/register">¿Todavia no tienes cuenta?</router-link>
+
           <div>
             <h1 class="error" v-for="error in errores">{{error}}</h1>
           </div>
@@ -99,6 +101,11 @@ main>div>div>h1{
 }
 .error{
   color: red;
+  margin-top: 30px;
+}
+a{
+  text-decoration: none;
+  color: blue;
 }
 .caja{
   display: flex;
@@ -121,7 +128,10 @@ main{
   width: 400px;
 }
 .formulario>*{
-  margin: 0 auto 10px;
+  margin: 0 auto 20px;
+}
+.formulario a{
+  margin-bottom: 0px;
 }
 
 </style>

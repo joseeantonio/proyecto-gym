@@ -17,7 +17,7 @@
       </div>
     </div>
     <div v-if="limite<39 && !loading" class="div-boton">
-      <button  @click="cargarMas"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      <button class="cargar-mas"  @click="cargarMas"><i class="fa fa-plus" aria-hidden="true"></i></button>
     </div>
   </main>
   <main v-else>

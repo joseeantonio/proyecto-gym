@@ -23,6 +23,9 @@
 
             <div><input class="ckeckbox" type="checkbox" v-model="terminos">Acepto el acuerdo de terminos</div>
             <input class="btn btn-dark" type="submit" value="REGISTRARME">
+
+            <router-link to="/login">¿Ya tienes tienes cuenta?</router-link>
+
             <div>
               <h1 class="error" v-for="error in errores">{{error}}</h1>
             </div>
@@ -108,9 +111,11 @@ export default {
 
 
 <style scoped>
+
   .error{
     color: red;
     font-weight: bolder;
+    margin-top: 20px;
   }
   input{
     width: 300px;
@@ -148,9 +153,16 @@ export default {
     width: 400px;
   }
   .formulario>*{
-    margin: 0 auto 10px;
+    margin: 0 auto 13px;
   }
   .ckeckbox{
     width: 20px;
   }
+  a{
+    text-decoration: none;
+    color: blue;
+  }.formulario a{
+     margin-bottom: 0px;
+   }
+
 </style>

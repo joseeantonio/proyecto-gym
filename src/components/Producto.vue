@@ -33,6 +33,9 @@ h1{
   color: black;
   margin: 10px;
   font-size: 20px;
+  padding: 3px;
+  background-color: white;
+  border-radius: 10px;
 }
 .carta{
   background-color: rgba(130, 137, 148, 0.63);
