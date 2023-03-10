@@ -20,6 +20,7 @@
 export default {
 methods:{
   cerrarSesion(){
+      // Deslogueo al usuario almacenado en el store a traves del boton
       this.$store.commit('logoutUsername')
     this.$router.push('/login')
     }

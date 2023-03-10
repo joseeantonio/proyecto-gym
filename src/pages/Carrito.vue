@@ -19,7 +19,11 @@
         </button>
       </div>
       <div v-else>
-        <h1>Cargando</h1>
+        <div v-if="loading" class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -32,6 +36,7 @@ import Producto from "@/components/Producto.vue";
 import Swal from "sweetalert2";
 
 export default {
+  // Mostramos todos los productos que tiene en la cesta este usuario
   components: {Producto},
   data() {
     return {

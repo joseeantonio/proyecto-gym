@@ -47,10 +47,10 @@
     </div>
   </main>
   <main v-else>
-    <div class="div-cargando">
-      <loading v-model:active="cargando"
-               :can-cancel="true"
-               :is-full-page="true"/>
+    <div v-if="cargando" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
   </main>
 </template>
@@ -61,6 +61,7 @@ import Producto from "@/components/Producto.vue";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
+  // Reutilizamos esta pagina para las diferentes marcas que tenemos filtrando y mostrando sus productos
   components: {Producto,Loading},
   data() {
     return {

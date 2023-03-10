@@ -16,15 +16,15 @@
         </router-link>
       </div>
     </div>
-    <div v-if="limite<39 && !loading" class="div-boton">
+    <div v-if="limite<39 && !cargando" class="div-boton">
       <button class="cargar-mas"  @click="cargarMas"><i class="fa fa-plus" aria-hidden="true"></i></button>
     </div>
   </main>
   <main v-else>
-    <div class="div-cargando">
-      <loading v-model:active="cargando"
-               :can-cancel="true"
-               :is-full-page="true"/>
+    <div v-if="cargando" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
   </main>
 </template>
@@ -35,16 +35,12 @@ import Producto from "@/components/Producto.vue";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css'
 export default {
+  // Mostramos todos los productos del listado de producto y las dos marcas que se pueden acceder a ellas
   components: {Producto,Loading},
   data() {
     return {
-      todosLosProductos:null,
       productos:null,
       limite:12,
-      productosHammer:null,
-      hammer:null,
-      productosMatrix:null,
-      matrix:null,
       cargando:true,
     }
   },

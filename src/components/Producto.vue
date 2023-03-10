@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  // Componente que utilizo para mostrar imagen y nombre a la hora del listado, la cesta.
   props:{
     producto: {
       type:Object,

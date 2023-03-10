@@ -52,6 +52,7 @@ export default {
   },
   methods:{
     checkForm(e) {
+      // Validacion
       this.loading=true
       this.errores = []
       let okey = true
@@ -83,6 +84,7 @@ export default {
             password:this.password,
             username:this.name
           }
+          // Llamada a la api para registrar, se comprueba si ya hay alguno creado con ese username o email.
           gymApi.post(`/users/`,datos)
               .then(res => {
                 debugger

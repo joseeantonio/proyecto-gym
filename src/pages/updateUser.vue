@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="!cargando" >
     <div class="caja-de-fuera">
       <div class="caja">
         <h1>{{this.$store.state.username}} ¿Quieres cambiar algo de tu perfil?</h1>
@@ -23,6 +23,13 @@
       </div>
     </div>
   </main>
+  <main v-else>
+    <div v-if="cargando" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -35,6 +42,7 @@ export default {
       email : null,
       password : null,
       password_rep : null,
+      cargando : false
     }
   },
   methods:{

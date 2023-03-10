@@ -21,7 +21,8 @@
 <script>
 import gymApi from "@/api/gymApi";
 import Swal from "sweetalert2";
-import data from "bootstrap/js/src/dom/data";
+
+//Utilizo este componente para mostrar todos los detalles de el tiene una opcion de añadir a la cesta.
 export default {
   components: {},
   data() {
@@ -31,6 +32,7 @@ export default {
     }
   },
   async created() {
+    //Cogemos los datos del producto
     await gymApi.get(`productos/${this.$route.params.id}`)
         .then(res => {
           this.producto = res.data
@@ -40,7 +42,7 @@ export default {
         })
   },
   methods:{
-    //llamada a la api para que me añada el producto a el carrito de ese usuario almacenado en el backend
+    //llamada a la api para que me añada el producto a el carrito de ese usuario almacenado
     anadirCarrito(){
       this.loading=true
       gymApi.post(`/cestas/anadirProducto/cesta/${this.producto.id}*${this.$store.state.username}`)

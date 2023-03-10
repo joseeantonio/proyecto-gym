@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="!cargando">
     <div class="caja-de-fuera">
       <div class="caja">
         <h1>INICIO DE SESION</h1>
@@ -22,6 +22,13 @@
       </div>
     </div>
   </main>
+  <main v-else>
+    <div v-if="cargando" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </main>
 
 </template>
 
@@ -38,11 +45,14 @@ export default {
       username:null,
       password:null,
       mensaje:null,
+      cargando : false
     }
   },
 
   methods: {
     iniciarSesion(){
+      // Compruebo simplemente si esta o no registrado (No valido ya que para estar registrado a tenido que ser validado.)
+      this.cargando = true
       this.errores=[]
       if (!this.password || !this.username){
         this.errores.push('Rellene todos los campos por favor')
@@ -64,6 +74,7 @@ export default {
                 this.errores.push('Debes de registrarte')
               }
             })
+        //Cuando me registre cogere la cantidad de productos que tiene en la cesta para mostrar en el navbar a traves del store
         gymApi.get(`cestas/productosCesta/${this.username}`)
             .then(res => {
               console.log(res.data.length)
@@ -73,6 +84,7 @@ export default {
               console.log(e)
             })
       }
+      this.cargando = false
     },
     setUsername(){
       this.$store.commit('loginUsername',this.username)
