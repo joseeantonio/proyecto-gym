@@ -60,7 +60,7 @@ export default {
       this.loading=true
       gymApi.delete(`/cestas/anadirProducto/cesta/${productoid}*${this.$store.state.username}`)
           .then(res =>
-          {console.log(res.data)
+          {
             this.productos = res.data
             this.loading=false
             this.$store.commit('setCantidad',res.data.length)

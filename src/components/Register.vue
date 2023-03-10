@@ -73,7 +73,6 @@ export default {
               okey = false
             }
           }
-          debugger
       }
       if (okey === true){
         if (!this.terminos){
@@ -87,7 +86,6 @@ export default {
           // Llamada a la api para registrar, se comprueba si ya hay alguno creado con ese username o email.
           gymApi.post(`/users/`,datos)
               .then(res => {
-                debugger
                 if (res.data.msg !=='entrada duplicada'){
                   this.productosHammer = res.data
                   Swal.fire({

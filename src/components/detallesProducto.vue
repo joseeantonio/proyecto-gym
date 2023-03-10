@@ -47,8 +47,6 @@ export default {
       this.loading=true
       gymApi.post(`/cestas/anadirProducto/cesta/${this.producto.id}*${this.$store.state.username}`)
           .then(res => {
-            debugger
-            console.log(res.data)
             this.$store.commit('setCantidad',res.data.productos.length)
             this.loading=false
               }

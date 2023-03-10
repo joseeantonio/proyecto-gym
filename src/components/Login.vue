@@ -77,7 +77,6 @@ export default {
         //Cuando me registre cogere la cantidad de productos que tiene en la cesta para mostrar en el navbar a traves del store
         gymApi.get(`cestas/productosCesta/${this.username}`)
             .then(res => {
-              console.log(res.data.length)
               this.$store.commit('setCantidad',res.data.length)
             })
             .catch((e) => {
