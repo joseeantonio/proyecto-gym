@@ -6,7 +6,7 @@
         <ul>
           <li v-if="this.$store.state.username" ><router-link to="/updatePerfil">ACTUALIZAR PERFIL</router-link></li>
           <li><router-link to="/listado">MAQUINAS</router-link></li>
-          <li v-if="this.$store.state.username" ><router-link to="/carrito">CARRITO->{{this.$store.state.cantidad}}</router-link></li>
+          <li v-if="this.$store.state.username" ><router-link to="/carrito"><i class="fas fa-shopping-cart"></i> {{this.$store.state.cantidad}}</router-link></li>
           <li v-if="this.$store.state.username" ><button @click="cerrarSesion" >CERRAR SESION</button></li>
           <li v-if="!this.$store.state.username" ><router-link to="/login">INICIAR SESION</router-link></li>
           <li v-if="!this.$store.state.username" ><router-link to="/register">REGISTRARME</router-link></li>

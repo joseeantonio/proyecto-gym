@@ -7,8 +7,7 @@
       </div>
     </div>
     <div class="carrito-vacio" v-else-if="productos===null ||productos.length===0">
-      <h1>AÑADE ALGO A LA CESTA</h1>
-      <button @click="irAProductos" class="boton-ir" >IR</button>
+      <h1>No tienes productos en tu cesta</h1>
     </div>
     <div v-else class="productos">
       <div v-if="productos" class="producto" v-for="producto in productos">
@@ -16,7 +15,7 @@
           <Producto :producto="producto"/>
         </router-link>
         <h1 class="cantidad" >Cantidad : {{producto.cantidad}}</h1>
-        <button @click="confirmarEliminar(producto)" ><i class="fa fa-trash" aria-hidden="true"></i>
+        <button class="boton-eliminar" @click="confirmarEliminar(producto)" ><i class="fa fa-trash" aria-hidden="true"></i>
         </button>
       </div>
       <div v-else>
@@ -74,7 +73,7 @@ export default {
           .fire({
             title: `${producto.name}`,
             text: "¿Quieres eliminarlo del carrito?",
-            icon: 'warning',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonText: "Sí, eliminar",
             cancelButtonText: "Cancelar",
@@ -97,6 +96,10 @@ export default {
 
 
 <style scoped>
+.boton-eliminar{
+  padding: 10px;
+  border-radius: 50%;
+}
 main{
   min-height: 700px;
   background-color: rgba(0, 0, 0, 0.61);
@@ -105,9 +108,11 @@ main>h1{
   font-size: 60px;
   text-align: center;
   padding: 20px;
+  color:black ;
 }
 .cantidad{
   margin: 20px 20px 10px;
+  color: black;
 }
 .productos{
   display: grid;
@@ -126,11 +131,5 @@ main>h1{
 .carrito-vacio>h1{
   margin: 150px 150px 80px;
   font-size: 30px;
-}
-.boton-ir{
-  width: 100px;
-  height: 100px;
-  border-radius: 20px;
-  margin: 0 auto;
 }
 </style>

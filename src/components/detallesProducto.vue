@@ -4,14 +4,17 @@
       <router-link to="/listado"><i class="fas fa-reply"></i></router-link>
     </div>
     <section v-if="producto">
-      <img :src="producto.image" alt="">
-      <div>
+      <div class="caja-afuera-img">
+        <div class="imagen">
+          <img :src="producto.image" alt="">
+        </div>
+      </div>
+      <div class="detalles">
         <h1>{{producto.name}}</h1>
-        <p>descripcion: {{producto.description}}</p>
-        <h3>Precio : {{producto.size}}€</h3>
+        <p>{{producto.description}} Es de la marca de {{producto.marca}}, y su categoria es de {{producto.category}}. Todo por un precio de {{producto.size}}.</p>
       </div>
     </section>
-    <button :disabled="loading"  @click="confirmarAnadir()" >+ Añadir a carrito</button>
+    <button class="boton-añadir" :disabled="loading"  @click="confirmarAnadir()" ><i class="fa fa-plus" aria-hidden="true"></i> Añadir a carrito</button>
   </main>
 </template>
 
@@ -55,9 +58,9 @@ export default {
     confirmarAnadir(){
       Swal
           .fire({
-            title: `${this.producto.name}`,
-            text: "¿Añadir a carrito?",
-            icon: 'success',
+            title: `¿Añadir a carrito?`,
+            text: `${this.producto.name}`,
+            icon: 'question',
             showCancelButton: true,
             confirmButtonText: "Sí, añadir",
             cancelButtonText: "Cancelar",
@@ -80,18 +83,55 @@ main{
   min-height: 700px;
   background-color: rgba(0, 0, 0, 0.61);
 }
-
-section{
+.caja-afuera-img{
   display: flex;
-  justify-content: space-around;
-  padding-top: 90px;
-  padding-bottom: 90px;
+  justify-content: center;
+}
+.imagen{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  padding: 1px;
+  background-color: rgba(130, 137, 148, 0.63);
+  border-radius: 10px 10px 0px 0px;
+  border: 3px solid black;
+}
+.imagen img{
+  min-height: 300px;
+}
+.detalles{
+  display: block;
+  justify-content: center;
+}
+.detalles p{
+  margin: 0 auto;
+  width: 700px;
+  font-size: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: white;
+}
+.boton-añadir{
+  padding: 18px;
+  margin-bottom: 34px;
+  border-radius: 12px;
+  background-color: black;
+  color: white;
 }
 img{
   max-height: 200px;
 }
 h1{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-radius: 0px 0px 10px 10px;
+  background-color: white;
+  width: 400px;
+  text-align: center;
   font-size: 50px;
+  border: 3px solid black;
+  margin: -3px auto 0;
 }
 p{
   margin: 50px;
