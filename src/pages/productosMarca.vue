@@ -179,6 +179,10 @@ input[type=radio]{
   height: 700px;
 }
 
+.filtros{
+  margin-bottom: 60px;
+}
+
 .reset{
   padding-bottom: 50px;
   padding-top: 15px;
@@ -221,7 +225,7 @@ a{
   text-decoration: none;
 }
 .marca{
-  padding: 100px;
+  padding: 80px;
   text-align: center;
 }
 .marca h1 {

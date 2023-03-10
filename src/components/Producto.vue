@@ -1,7 +1,9 @@
 <template>
     <router-link :to="`/producto/`+producto.id">
-      <img :src=producto.image>
-      <h1>{{producto.name}}</h1>
+      <div class="carta">
+        <img :src=producto.image>
+        <h1>{{producto.name}}</h1>
+      </div>
     </router-link>
 </template>
 
@@ -28,8 +30,14 @@ img{
   max-height: 218px;
 }
 h1{
-  color: white;
+  color: black;
   margin: 10px;
-  font-size: 30px;
+  font-size: 20px;
+}
+.carta{
+  background-color: rgba(130, 137, 148, 0.63);
+  border-radius: 15px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 </style>
