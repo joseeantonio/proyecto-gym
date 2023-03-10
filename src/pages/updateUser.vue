@@ -5,7 +5,9 @@
         <h1>{{this.$store.state.username}} ¿Quieres cambiar algo de tu perfil?</h1>
         <form class="formulario" @submit="checkForm">
           <label type="email">Correo electronico</label>
-          <input type="email" v-model="email">
+          <input type="email"
+                 v-model="email"
+          >
 
           <label type="password">Contraseña</label>
           <input type="password" v-model="password">
@@ -36,6 +38,16 @@ export default {
     }
   },
   methods:{
+    async getUser(){
+      this.cargando = true
+      gymApi.get(`users/${this.$store.state.username}`)
+          .then(res => {
+            this.email = res.data.email
+            this.cargando = false})
+          .catch((e)=>{
+            console.log(e)
+          })
+    },
     checkForm(e) {
       var datos = {}
       this.errores = []
@@ -65,22 +77,24 @@ export default {
           gymApi.patch(`/users/update/${this.$store.state.username}`,datos)
               .then(res => {
                 if (res.data.msg==='actualizado'){
-                  this.$router.push('/carrito')
-                  //npm install --save sweetalert2       instalo la libreria de sweetalert para mostrar que ha sido registrado
                   Swal.fire({
                     title: `Usuario ${this.$store.state.username} actualizado`,
                     confirmButtonText: "Aceptar",
                   });
+                }else{
+                  this.errores.push('Este correo esta en uso')
                 }
               })
         }
       }
     },
     setUsername(){
-      debugger
       this.$store.commit('setUsername',this.name)
     },
   },
+  created() {
+    this.getUser()
+  }
 }
 </script>
 

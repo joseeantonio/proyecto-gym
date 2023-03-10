@@ -17,7 +17,7 @@
       </div>
     </div>
     <div v-if="limite<39 && !loading" class="div-boton">
-      <button @click="cargarMas">Cargar mas</button>
+      <button class="cargar-mas" @click="cargarMas"><i class="fa fa-plus" aria-hidden="true"></i></button>
     </div>
   </main>
   <main v-else>
@@ -53,6 +53,7 @@ export default {
       this.limite += 12
     },
     async getApi(){
+      this.cargando = true
       gymApi.get(`/productos/paginacion/${this.limite}`)
           .then(res => {this.productos = res.data
             this.cargando = false})
@@ -64,7 +65,6 @@ export default {
   ,
   watch:{
     limite(){
-      debugger
       this.getApi()
     }
   }
@@ -82,6 +82,17 @@ main{
   min-height: 700px;
   background-color: rgba(0, 0, 0, 0.61);
 }
+
+.cargar-mas{
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+}
+
 a{
   text-decoration: none;
 }
@@ -97,8 +108,6 @@ a{
   color: black;
 }
 button{
-  width: 120px;
-  height: 20px;
   display: flex;
   margin: 20px auto;
 }
