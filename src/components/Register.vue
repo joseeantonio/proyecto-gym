@@ -81,13 +81,18 @@ export default {
             username:this.name
           }
           gymApi.post(`/users/`,datos)
-              .then(res => {this.productosHammer = res.data
+              .then(res => {
                 debugger
-                Swal.fire({
-                  title: `Te has registrado correctamente`,
-                  confirmButtonText: "OK",
-                });
-                this.$router.push('/login')
+                if (res.data.msg !=='entrada duplicada'){
+                  this.productosHammer = res.data
+                  Swal.fire({
+                    title: `Te has registrado correctamente`,
+                    confirmButtonText: "OK",
+                  });
+                  this.$router.push('/login')
+                }else{
+                  this.errores.push('Este username o gmail esta en uso.')
+                }
               })
               .catch((e)=>{
                 console.log(e)
